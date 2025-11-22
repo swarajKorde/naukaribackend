@@ -39,9 +39,13 @@ const jobSchema = new mongoose.Schema({
   location:{
     type:String
   },
+  result:{
+    type:String,
+    required:false
+  },
   agelimit:{
     type:String,
-    required:true
+   required: true
   },
   qualification: {
     type: [String],

@@ -14,6 +14,7 @@ app.use(cors());
 // route imports
 import jobsRoute from './routes/jobsRoute.js'
 import adminRoute from './routes/adminRoute.js'
+import resultRoute from './routes/resultRoute.js'
 connectDB()
 console.log(process.env.HELLO)
 
@@ -22,6 +23,7 @@ console.log(process.env.HELLO)
 // APP uses for different routes
 app.use('/job',jobsRoute)
 app.use('/admin',adminRoute)
+app.use('/result',resultRoute)
 
 
 // server working fine

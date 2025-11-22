@@ -9,6 +9,7 @@ const router =express.Router()
 router.get('/',isAdmin,getJobs)
 
 router.post('/',isAdmin,createJob)
+// router.get('/result',getResult)
 router.get('/:slug',getJobBySlug)
 
 export default router
