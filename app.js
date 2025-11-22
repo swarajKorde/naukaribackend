@@ -1,6 +1,7 @@
 // const express = require('express')
 import express from 'express'
 import dotenv from 'dotenv'
+import cookieParser from "cookie-parser";
 dotenv.config()
 import connectDB from './config/db.js'
 
@@ -10,6 +11,8 @@ const port = process.env.PORT ||3000
 app.use(express.json())
 import cors from "cors";
 app.use(cors());
+
+app.use(cookieParser());
 
 // route imports
 import jobsRoute from './routes/jobsRoute.js'

@@ -4,11 +4,11 @@ import createJob from '../controllers/job.controller.js'
 import {getJobBySlug, getJobs} from '../controllers/getjob.controller.js'
 const router =express.Router()
 
+// add isAdmin for authorization (pending task)
 
+router.get('/',getJobs)
 
-router.get('/',isAdmin,getJobs)
-
-router.post('/',isAdmin,createJob)
+router.post('/',createJob)
 // router.get('/result',getResult)
 router.get('/:slug',getJobBySlug)
 

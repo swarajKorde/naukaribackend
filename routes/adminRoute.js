@@ -11,7 +11,7 @@ const router =express()
 router.post('/login',getAdmin)
 
 // creating use in this case is referred as admin
-router.post('/signup',isAdmin,createAdmin)
+router.post('/signup',createAdmin)
 
 
 export default router
