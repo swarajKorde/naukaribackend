@@ -1,5 +1,6 @@
 // controllers/adminController.js
 import Admin from "../model/admin.js"
+import jwt from "jsonwebtoken";
 // import bcrypt from 'bcrypt'
 
 export const createAdmin = async (req, res) => {
@@ -36,9 +37,29 @@ export const getAdmin = async (req, res) => {
     const isUser = await Admin.findOne({email})
     if(!isUser) return res.status(400).send("admin does not exist")
     if(isUser.password!==password) return res.status(400).send("Wrong Password")
-    res.status(200).send("user found")
+
+      // creating the payload for jwt
+      const payload ={
+        id:isUser._id,
+        email:isUser.email,
+        role:admin,
+      };
+      const token = jwt.sign(payload,process.env.JWT_SECRET,{
+      expiresIn: process.env.JWT_EXPIRES_IN || "7d",
+    })
+    return res.status(200).json({
+      msg:"login success",
+      token:token,
+      admin:{
+        id:isUser._id,
+        name:isUser.name,
+        email:isUser.email
+      }
+    })
+    // res.status(200).send("user found") // doesnt required now old cold scrap this when needed
   } catch (error) {
       console.log(error)
+      res.status(400).send("server error")
   }
 
 }
