@@ -1,5 +1,5 @@
 import express from "express";
-import { createAdmin ,getAdmin} from "../controllers/admin.controller.js";
+import { createAdmin ,getAdmin , getLoggedOut} from "../controllers/admin.controller.js";
 import { isAdmin } from "../middleware/admin.Check.js";
 const router =express()
 
@@ -9,6 +9,7 @@ const router =express()
 // })
 // gettin user in this is referred as admin [for login purposes]
 router.post('/login',getAdmin)
+router.post('/logout',getLoggedOut)
 
 // creating use in this case is referred as admin
 router.post('/signup',createAdmin)

@@ -68,7 +68,7 @@ export const getAdmin = async (req, res) => {
     })
     res.cookie("token", token, {
       httpOnly: true,        // ⛔ Prevent JS access (XSS safe)
-   
+
     });
     return res.status(200).json({
       msg: "login success",
@@ -85,4 +85,22 @@ export const getAdmin = async (req, res) => {
     res.status(400).send("server error")
   }
 
+}
+
+export const getLoggedOut = async (req, res) => {
+  try {
+    res.clearCookie("token", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+    path: "/",
+    domain: "localhost"
+  });
+  res.status(200).sent("its done cookie is deleted")
+
+    return res.json({ success: true, message: "Logged out" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ success: false, message: "Error logging out" });
+  }
 }
