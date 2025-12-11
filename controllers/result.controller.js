@@ -1,19 +1,60 @@
 
 import Result from "../model/result.js"
 
+// get all result? 
 export const getResult=async(req,res)=>{
     // const result = await Results.find()
     const result =await Result.find()
-    res.status(200).send(result)
+    res.status(200).json(result)
+    res.status(400).json({
+      massage:"the wrong way brother"
+    })
 }
 
-export const createResult =async(req,res)=>{
-    const {title,slug} = req.body
-    const result ={title:title,slug:slug}
-    Result.create(result)
-    res.send("result is added")
-}
+export const createResult = async (req, res) => {
+   
+  try {
+    const {
+      title,
+      slug,
+      company,
+      logo,
+      resultDate,
+      resultLink,
+      cutoffs,
+      
+    } = await req.body;
 
+    const result = await Result.create({
+      title,
+      slug,
+      company,
+      logo,
+      resultDate,
+      resultLink,
+      cutoffs,
+      createdBy:req.user.id
+    });
+
+    console.log(result);
+
+    return res.status(201).json({
+      message: "Result Added Successfully",
+      result
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    return res.status(400).json({
+      message: "Result is not Added",
+      error: "brother this is from here"
+    });
+  }
+};
+
+
+// result by slug
 export const getResultBySlug = async (req, res) => {
     const { slug } = req.params;
 

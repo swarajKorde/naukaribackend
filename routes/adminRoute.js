@@ -1,6 +1,8 @@
 import express from "express";
 import { createAdmin ,getAdmin , getLoggedOut} from "../controllers/admin.controller.js";
 import { isAdmin } from "../middleware/admin.Check.js";
+import { isLogIn } from "../middleware/login.Check.js";
+
 const router =express()
 
 // route for /adminlogin

@@ -11,7 +11,7 @@ const port = process.env.PORT ||3000
 app.use(express.json())
 import cors from "cors";
 app.use(cors({
-  origin: "http://localhost:8080",
+  origin: ["http://localhost:8080","https://myfrontend123.loca.lt/"],
   credentials: true
 }));
 
@@ -21,12 +21,14 @@ app.use(cookieParser());
 import jobsRoute from './routes/jobsRoute.js'
 import adminRoute from './routes/adminRoute.js'
 import resultRoute from './routes/resultRoute.js'
+import { isLogIn } from './middleware/login.Check.js';
 connectDB()
 console.log(process.env.HELLO)
 
 
 
 // APP uses for different routes
+app.use('/me',isLogIn)
 app.use('/job',jobsRoute)
 app.use('/admin',adminRoute)
 app.use('/result',resultRoute)

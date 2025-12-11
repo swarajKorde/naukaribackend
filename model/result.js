@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const cutoffSchema = new mongoose.Schema({
-  category: { type: String, required: true },   // e.g., "General", "SC", "Blind", "PwD"
+  category: { type: String, required: true, uppercase:true },   // e.g., "General", "SC", "Blind", "PwD"
   value: { type: String, required: true }       // e.g., "74.5"
 });
 
@@ -16,7 +16,10 @@ const resultSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
     },
-
+    createdBy:{
+      type:mongoose.Schema.Types.ObjectId,
+      required:true
+    },
     company: { type: String, default: "", trim: true },
 
     logo: { type: String, default: "" },
@@ -26,6 +29,7 @@ const resultSchema = new mongoose.Schema(
     // ⭐ ANY number of cutoffs
     cutoffs: {
       type: [cutoffSchema],
+      required:false,
       default: [],
     },
 

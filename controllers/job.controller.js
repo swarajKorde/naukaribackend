@@ -1,6 +1,10 @@
 import Job from "../model/job.js";
 
+// create job controller
 const createJob = async (req, res) => {
+
+  // endpoint for creating the job
+  const adminId = await req.user.id
   try {
     const {
       title,
@@ -16,7 +20,7 @@ const createJob = async (req, res) => {
       posts,
       imageurl,
       description,
-      createdBy
+      
     } = req.body;
 
     const newJob = await Job.create({
@@ -33,7 +37,7 @@ const createJob = async (req, res) => {
       posts,
       imageurl,
       description,
-      createdBy
+      createdBy:adminId,
     });
 
     return res.status(201).json(newJob);

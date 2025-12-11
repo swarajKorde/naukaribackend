@@ -87,6 +87,7 @@ export const getAdmin = async (req, res) => {
 
 }
 
+// log out route
 export const getLoggedOut = async (req, res) => {
   try {
     res.clearCookie("token", {
